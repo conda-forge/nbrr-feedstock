@@ -5,11 +5,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/n/nbrr/nbrr-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/n/nbrr/nbrr-{{ version }}.tar.gz
   sha256: 4e7bc828288e4e36ae1e0c5644928b1de57ca73591a99d61cb91a0434cd917a3
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
   entry_points:
@@ -17,10 +17,10 @@ build:
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - depfinder
     - easyargs
     - gitpython
@@ -28,6 +28,8 @@ requirements:
     - git
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - nbrr
   commands:
